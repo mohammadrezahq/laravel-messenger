@@ -17,12 +17,7 @@ class CreateNewFriend extends App
             return "USER does not exist.";
         }
 
-        $where = [
-            'users' => $this->user()->id,
-            'users', $user->id
-        ];
-
-        $friend = Friend::whereJsonContains($where)->first();
+        $friend = Friend::whereJsonContains('users', $this->user()->id)->whereJsonContains('users', $user->id)->first();
 
         if ($friend) {
             return "FRIENDSHIP does not exist.";
