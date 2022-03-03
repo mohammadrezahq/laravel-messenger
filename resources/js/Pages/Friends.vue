@@ -39,6 +39,16 @@
               >
                 Accept
               </button>
+              <button
+                class="mx-2 text-gray-500 border-gray-500 border p-2 rounded-lg"
+                v-if="
+                  friend.status == 'pending' &&
+                  friend.data.pending == $page.props.user.id
+                "
+                @click="denyFriend(friend.user.id, i)"
+              >
+                Deny
+              </button>
             </div>
           </div>
         </div>
@@ -95,6 +105,18 @@ export default {
             this.friends[i].status = "accepted";
             miniToast
               .init("New friend has been accepted.", this.toastArgs)
+              .show();
+          }
+        });
+    },
+    denyFriend(id, i) {
+      axios
+        .post("/friends/update", { action: "deny", id: id })
+        .then((response) => {
+          if (response.data) {
+            this.friends.splice(i,1);
+            miniToast
+              .init("User has been denied.", this.toastArgs)
               .show();
           }
         });

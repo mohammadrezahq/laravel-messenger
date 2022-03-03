@@ -17,9 +17,17 @@ class UpdateFriend extends App {
             return false;
         }
 
+        if ($getFriend->data->pending !== $this->user()->id) {
+            return false;
+        }
+
         if ($data->action == 'accept') {
             CreateNewChat::create($getFriend->users);
             return $friend->update(['status' => 'accepted']);
+        }
+
+        if ($data->action == 'deny') {
+            return $friend->delete();
         }
     }
 
