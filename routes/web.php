@@ -23,4 +23,4 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/messages/get', [MessageC
 Route::middleware(['auth:sanctum', 'verified'])->post('/messages/send', [MessageController::class, 'create']);
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/friends/add', [FriendController::class, 'create']);
-Route::middleware(['auth:sanctum', 'verified'])->post('/friends/update', [FriendController::class, 'update']);
+Route::middleware(['auth:sanctum', 'verified'])->put('/friends/update', [FriendController::class, 'update']);
