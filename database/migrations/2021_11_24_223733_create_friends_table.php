@@ -16,7 +16,7 @@ class CreateFriendsTable extends Migration
         Schema::create('friends', function (Blueprint $table) {
             $table->id();
             $table->json('users');
-            $table->string('status');
+            $table->string('status')->default('pending');
             $table->json('data');
             $table->timestamps();
         });
